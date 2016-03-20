@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_cuenta"
+            android:icon="@drawable/ic_menu_cuenta"
+            android:title="Mi Cuenta" />
+        <item
+            android:id="@+id/nav_balanza"
+            android:icon="@drawable/ic_menu_balance"
+            android:title="Mi Balanza de Trueques" />
+        <item
+            android:id="@+id/nav_favs"
+            android:icon="@drawable/ic_menu_favs"
+            android:title="Mis Favoritos" />
+        <item
+            android:id="@+id/nav_msjs"
+            android:icon="@drawable/ic_menu_msjs"
+            android:title="Mis Mensajes" />
+        <item
+            android:id="@+id/nav_conf"
+            android:icon="@drawable/ic_menu_config"
+            android:title="Configuración" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_about"
+            android:title="Acerca de Reusalo" />
+    </group>
+
+</menu>
