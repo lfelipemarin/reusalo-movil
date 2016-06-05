@@ -1,6 +1,11 @@
 package com.reusalo.app.reusalo.activities;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,8 +20,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.reusalo.app.reusalo.R;
+import com.reusalo.app.reusalo.classes.ImagesHandler;
+import com.reusalo.app.reusalo.classes.SessionManager;
 import com.reusalo.app.reusalo.fragments.AboutFragment;
 import com.reusalo.app.reusalo.fragments.BalanzaFragment;
 import com.reusalo.app.reusalo.fragments.ConfigFragment;
@@ -25,12 +34,17 @@ import com.reusalo.app.reusalo.fragments.FavsFragment;
 import com.reusalo.app.reusalo.fragments.MsjsFragment;
 import com.reusalo.app.reusalo.fragments.TopFragment;
 
+import java.io.InputStream;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
     private MenuItem currentItem;
+    SessionManager session;
+    private View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +81,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        headerView = navigationView.getHeaderView(0);
 
         if (savedInstanceState == null) {
             Fragment fragment = new TopFragment();
@@ -75,6 +90,9 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             navigationView.setCheckedItem(R.id.nav_inicio);
         }
+
+        session = new SessionManager(this);
+        session.checkLogin();
 
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
@@ -110,6 +128,34 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // get user data from session
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        String image = user.get(SessionManager.KEY_IMAGE);
+
+        // name
+        String name = user.get(SessionManager.KEY_NAME);
+
+        // email
+        String email = user.get(SessionManager.KEY_EMAIL);
+
+
+        ImageView ivProfile = (ImageView) headerView.findViewById(R.id.imageView);
+        TextView tvUserName = (TextView) headerView.findViewById(R.id.tv_name);
+        TextView tvUserEmail = (TextView) headerView.findViewById(R.id.tv_email);
+        // show The Image in a ImageView
+        new DownloadImageTask(ivProfile)
+                .execute(image);
+
+        tvUserName.setText(name);
+        tvUserEmail.setText(email);
     }
 
     @Override
@@ -204,5 +250,30 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }
