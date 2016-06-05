@@ -150,12 +150,18 @@ public class MainActivity extends AppCompatActivity
         ImageView ivProfile = (ImageView) headerView.findViewById(R.id.imageView);
         TextView tvUserName = (TextView) headerView.findViewById(R.id.tv_name);
         TextView tvUserEmail = (TextView) headerView.findViewById(R.id.tv_email);
-        // show The Image in a ImageView
-        new DownloadImageTask(ivProfile)
-                .execute(image);
+        try {
+            // show The Image in a ImageView
+            new DownloadImageTask(ivProfile)
+                    .execute(image);
 
-        tvUserName.setText(name);
-        tvUserEmail.setText(email);
+            tvUserName.setText(name);
+            tvUserEmail.setText(email);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -223,6 +229,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_about:
                 fragmentClass = AboutFragment.class;
                 break;
+            case R.id.nav_signout:
+                session.logoutUser();
+                return true;
             default:
                 fragmentClass = TopFragment.class;
         }
@@ -266,7 +275,7 @@ public class MainActivity extends AppCompatActivity
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
-                Log.e("Error", e.getMessage());
+                //Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
             return mIcon11;

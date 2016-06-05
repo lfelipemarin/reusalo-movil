@@ -30,6 +30,10 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_about"
             android:title="Acerca de Reusalo" />
+        <item
+            android:id="@+id/nav_signout"
+            android:icon="@drawable/ic_power_settings"
+            android:title="Cerrar Sesión" />
     </group>
 
 </menu>

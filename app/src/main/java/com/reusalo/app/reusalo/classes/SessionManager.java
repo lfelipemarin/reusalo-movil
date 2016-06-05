@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.reusalo.app.reusalo.R;
 import com.reusalo.app.reusalo.activities.LoginActivity;
 import com.reusalo.app.reusalo.fragments.TopFragment;
@@ -137,6 +138,7 @@ public class SessionManager {
         // Clearing all data from Shared Preferences
         editor.clear();
         editor.commit();
+        FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(_context, LoginActivity.class);
         // set the new task and clear flags
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
