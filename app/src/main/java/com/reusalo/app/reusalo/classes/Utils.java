@@ -1,15 +1,25 @@
 package com.reusalo.app.reusalo.classes;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.widget.ImageView;
 
 import com.reusalo.app.reusalo.R;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by fmarin on 5/06/16.
  */
 public class Utils {
     Context mContext;
+    Bitmap bmImg;
 
     public Utils(Context context) {
         mContext = context;
@@ -31,4 +41,5 @@ public class Utils {
                 return 0;
         }
     }
+
 }
