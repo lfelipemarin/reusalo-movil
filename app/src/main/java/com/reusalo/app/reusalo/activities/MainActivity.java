@@ -1,11 +1,13 @@
 package com.reusalo.app.reusalo.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -20,11 +22,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.reusalo.app.reusalo.R;
+import com.reusalo.app.reusalo.RestInterface;
 import com.reusalo.app.reusalo.classes.ImagesHandler;
+import com.reusalo.app.reusalo.classes.PojoModel;
 import com.reusalo.app.reusalo.classes.SessionManager;
 import com.reusalo.app.reusalo.fragments.AboutFragment;
 import com.reusalo.app.reusalo.fragments.BalanzaFragment;
@@ -37,6 +42,11 @@ import com.reusalo.app.reusalo.fragments.TopFragment;
 import java.io.InputStream;
 import java.util.HashMap;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,9 +56,12 @@ public class MainActivity extends AppCompatActivity
     SessionManager session;
     private View headerView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        session = new SessionManager(this);
+        session.checkLogin();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -83,16 +96,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
 
-        if (savedInstanceState == null) {
-            Fragment fragment = new TopFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-            navigationView.setCheckedItem(R.id.nav_inicio);
-        }
 
-        session = new SessionManager(this);
-        session.checkLogin();
+
 
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override

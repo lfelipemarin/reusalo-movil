@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.reusalo.app.reusalo.classes.ItemObject;
+import com.reusalo.app.reusalo.classes.PojoModel;
+import com.reusalo.app.reusalo.classes.Utils;
 
 import java.util.List;
 
@@ -15,10 +17,11 @@ import java.util.List;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolders> {
 
-    private List<ItemObject> itemList;
+    private List<PojoModel> itemList;
     private Context context;
+    private Utils utils;
 
-    public RecyclerViewAdapter(Context context, List<ItemObject> itemList) {
+    public RecyclerViewAdapter(Context context, List<PojoModel> itemList) {
         this.itemList = itemList;
         this.context = context;
     }
@@ -32,12 +35,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
-        holder.countryName.setText(itemList.get(position).getName());
-        holder.countryPhoto.setImageResource(itemList.get(position).getPhoto());
+        utils = new Utils(context);
+        String nombre = itemList.get(0).getCategorias().get(position).getNombre();
+        holder.catName.setText(nombre);
+        holder.catPhoto.setImageResource(utils.getImagen(nombre));
     }
 
     @Override
     public int getItemCount() {
-        return this.itemList.size();
+        return this.itemList.get(0).size();
     }
 }

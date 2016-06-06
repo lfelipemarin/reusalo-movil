@@ -9,7 +9,6 @@ import com.google.gson.annotations.SerializedName;
  * Created by fmarin on 1/06/16.
  */
 
-
 @Generated("org.jsonschema2pojo")
 public class Producto {
 

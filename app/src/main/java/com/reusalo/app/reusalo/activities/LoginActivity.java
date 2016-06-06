@@ -76,13 +76,14 @@ public class LoginActivity extends BaseActivity implements
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    // [START_EXCLUDE]
+                    createSession(user);
+                    // [END_EXCLUDE]
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // [START_EXCLUDE]
-                createSession(user);
-                // [END_EXCLUDE]
+
             }
         };
         // [END auth_state_listener]
@@ -129,6 +130,7 @@ public class LoginActivity extends BaseActivity implements
         // [END_EXCLUDE]
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        Log.d(TAG,acct.getIdToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

@@ -15,56 +15,26 @@ import com.google.gson.annotations.SerializedName;
 @Generated("org.jsonschema2pojo")
 public class PojoModel {
 
-    @SerializedName("id_categoria")
+    @SerializedName("categorias")
     @Expose
-    private Integer idCategoria;
-    @SerializedName("nombre")
-    @Expose
-    private String nombre;
-    @SerializedName("productos")
-    @Expose
-    private List<Producto> productos = new ArrayList<Producto>();
+    private List<Categoria> categorias = new ArrayList<Categoria>();
 
     /**
-     * @return The idCategoria
+     * @return The categorias
      */
-    public Integer getIdCategoria() {
-        return idCategoria;
+    public List<Categoria> getCategorias() {
+        return categorias;
     }
 
     /**
-     * @param idCategoria The id_categoria
+     * @param categorias The categorias
      */
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
-    /**
-     * @return The nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre The nombre
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * @return The productos
-     */
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    /**
-     * @param productos The productos
-     */
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public int size() {
+        return categorias.size();
     }
 
 }
