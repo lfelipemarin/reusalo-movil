@@ -39,14 +39,14 @@ public class ProdRecyclerViewAdapter extends RecyclerView.Adapter<ProdRecyclerVi
     @Override
     public void onBindViewHolder(ProdRecyclerViewHolders holder, int position) {
         utils = new Utils(context);
-        String nombre = itemList.get(0).getCategorias().get(catId).getProductos().get(position).getNombreProd();
+        String nombre = itemList.get(catId).getProductos().get(position).getNombreProd();
         holder.catName.setText(nombre);
-        String imageUrl = itemList.get(0).getCategorias().get(catId).getProductos().get(position).getFotoProd();
+        String imageUrl = itemList.get(catId).getProductos().get(position).getFotoProd();
         Picasso.with(holder.catPhoto.getContext()).load(imageUrl).into(holder.catPhoto);
     }
 
     @Override
     public int getItemCount() {
-        return this.itemList.get(0).getCategorias().get(catId).getProductos().size();
+        return this.itemList.get(catId).getProductos().size();
     }
 }

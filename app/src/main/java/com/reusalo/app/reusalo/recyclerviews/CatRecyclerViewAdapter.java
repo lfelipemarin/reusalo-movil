@@ -36,13 +36,13 @@ public class CatRecyclerViewAdapter extends RecyclerView.Adapter<CatRecyclerView
     @Override
     public void onBindViewHolder(CatRecyclerViewHolders holder, int position) {
         utils = new Utils(context);
-        String nombre = itemList.get(0).getCategorias().get(position).getNombre();
+        String nombre = itemList.get(position).getNombre();
         holder.catName.setText(nombre);
         holder.catPhoto.setImageResource(utils.getImagen(nombre));
     }
 
     @Override
     public int getItemCount() {
-        return this.itemList.get(0).size();
+        return this.itemList.size();
     }
 }
