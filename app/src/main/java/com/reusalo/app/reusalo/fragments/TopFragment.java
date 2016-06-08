@@ -29,7 +29,8 @@ import retrofit.client.Response;
 public class TopFragment extends Fragment {
 
     private GridLayoutManager linLayout;
-    private static final String URL = "http://192.168.0.112:8081";
+    //private static final String URL = "http://192.168.0.112:8081";
+    private static final String URL = "https://reusalo.herokuapp.com";
     private View view;
 
     public TopFragment() {
