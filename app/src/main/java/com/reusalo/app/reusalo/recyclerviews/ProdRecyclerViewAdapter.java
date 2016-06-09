@@ -18,20 +18,20 @@ import java.util.List;
  */
 public class ProdRecyclerViewAdapter extends RecyclerView.Adapter<ProdRecyclerViewHolders> {
 
-    private List<PojoModel> itemList;
+    private PojoModel itemList;
     private Context context;
     private Utils utils;
-    private int catId;
+    private int prodId;
 
-    public ProdRecyclerViewAdapter(Context context, List<PojoModel> itemList, int catId) {
+    public ProdRecyclerViewAdapter(Context context, PojoModel itemList, int prodId) {
         this.itemList = itemList;
         this.context = context;
-        this.catId = catId;
+        this.prodId = prodId;
     }
 
     @Override
     public ProdRecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_list, null);
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_prod, null);
         ProdRecyclerViewHolders rcv = new ProdRecyclerViewHolders(layoutView);
         return rcv;
     }
@@ -39,14 +39,18 @@ public class ProdRecyclerViewAdapter extends RecyclerView.Adapter<ProdRecyclerVi
     @Override
     public void onBindViewHolder(ProdRecyclerViewHolders holder, int position) {
         utils = new Utils(context);
-        String nombre = itemList.get(catId).getProductos().get(position).getNombreProd();
-        holder.catName.setText(nombre);
-        String imageUrl = itemList.get(catId).getProductos().get(position).getFotoProd();
-        Picasso.with(holder.catPhoto.getContext()).load(imageUrl).into(holder.catPhoto);
+        String nombre = itemList.getProductos().get(prodId).getNombreProd();
+        holder.prodName.setText(nombre);
+        holder.estado.setText(itemList.getProductos().get(prodId).getEstado());
+        holder.descr.setText(itemList.getProductos().get(prodId).getDescripcionProd());
+        holder.date.setText(itemList.getProductos().get(prodId).getFechaPublicacion());
+        String imageUrl = itemList.getProductos().get(prodId).getFotoProd();
+        Picasso.with(holder.prodPhoto.getContext()).load(imageUrl).into(holder.prodPhoto);
     }
 
     @Override
     public int getItemCount() {
-        return this.itemList.get(catId).getProductos().size();
+        //return this.itemList.getProductos().size();
+        return 1;
     }
 }

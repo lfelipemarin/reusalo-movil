@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.reusalo.app.reusalo.recyclerviews.ProdRecyclerViewAdapter;
+import com.reusalo.app.reusalo.recyclerviews.ProdsRecyclerViewAdapter;
 import com.reusalo.app.reusalo.R;
 import com.reusalo.app.reusalo.RestInterface;
 import com.reusalo.app.reusalo.classes.PojoModel;
@@ -34,6 +34,7 @@ public class ProductosFragment extends Fragment {
     private View view;
 
     private int catId;
+    private String catName;
 
     public ProductosFragment() {
         // Required empty public constructor
@@ -69,7 +70,7 @@ public class ProductosFragment extends Fragment {
                     rView.setHasFixedSize(true);
                     rView.setLayoutManager(linLayout);
 
-                    ProdRecyclerViewAdapter rcAdapter = new ProdRecyclerViewAdapter(getActivity(),
+                    ProdsRecyclerViewAdapter rcAdapter = new ProdsRecyclerViewAdapter(getActivity(),
                             pojoModels, catId);
                     rView.setAdapter(rcAdapter);
                 }
@@ -87,11 +88,16 @@ public class ProductosFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("Productos");
+        //getActivity().setTitle("Productos");
+        getActivity().setTitle(catName);
     }
 
     public void setCatId(int catId) {
         this.catId = catId;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
     }
 
 }

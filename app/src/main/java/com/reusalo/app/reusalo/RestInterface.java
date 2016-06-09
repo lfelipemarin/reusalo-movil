@@ -15,4 +15,7 @@ public interface RestInterface {
 
     @GET("/categorias")
     void getCategorias(Callback<List<PojoModel>> cb);
+
+    @GET("/categoria")
+    void getCategoria(@Query("id") String id, Callback<PojoModel> cb);
 }

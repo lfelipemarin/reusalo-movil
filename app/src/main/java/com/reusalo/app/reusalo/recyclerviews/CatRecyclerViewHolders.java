@@ -35,6 +35,7 @@ public class CatRecyclerViewHolders extends RecyclerView.ViewHolder implements V
         Toast.makeText(view.getContext(), "Clicked Country Position = " + getPosition(), Toast.LENGTH_SHORT).show();
         ProductosFragment productosFragment = new ProductosFragment();
         productosFragment.setCatId(getPosition());
+        productosFragment.setCatName(catName.getText().toString());
         FragmentTransaction ft = ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, productosFragment);
         ft.addToBackStack(null);
