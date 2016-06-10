@@ -28,15 +28,25 @@ public class Utils {
     public int getImagen(String nombre) {
         switch (nombre) {
             case "Celulares y tablets":
-                return R.drawable.im_cels;
+                return R.drawable.im_celutab;
             case "TV Audio y Foto":
-                return R.drawable.im_tvaudio;
+                return R.drawable.im_tvaudfot;
             case "Consolas y videojuegos":
-                return R.drawable.im_juegos;
+                return R.drawable.im_consolasjuego;
             case "Hogar":
                 return R.drawable.im_hogar;
             case "Electrodomesticos":
-                return R.drawable.im_electro;
+                return R.drawable.im_electrodomestico;
+            case "Salud y Bienestar":
+                return R.drawable.im_saludybienes;
+            case "Juguetes niños y bebes":
+                return R.drawable.im_juguetes;
+            case "Deportes":
+                return R.drawable.im_deporte;
+            case "Supermercados":
+                return R.drawable.im_supermercado;
+            case "Joyeria":
+                return R.drawable.im_joyeria;
             default:
                 return 0;
         }

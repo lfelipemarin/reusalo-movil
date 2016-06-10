@@ -32,7 +32,7 @@ public class CatRecyclerViewHolders extends RecyclerView.ViewHolder implements V
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), "Clicked Country Position = " + getPosition(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(view.getContext(), "Clicked Country Position = " + getPosition(), Toast.LENGTH_SHORT).show();
         ProductosFragment productosFragment = new ProductosFragment();
         productosFragment.setCatId(getPosition());
         productosFragment.setCatName(catName.getText().toString());
